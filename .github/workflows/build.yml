@@ -1,0 +1,40 @@
+name: cpp-cmake-mingw-prebuilt-release-actions-workflow
+on:
+  push:
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      targetZip: fnmatch.js-${{ github.ref_name }}-emscripten.zip
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Build
+        run: |
+          docker run \
+          --rm \
+          -v $(pwd):/src \
+          -u $(id -u):$(id -g) \
+          emscripten/emsdk \
+          emcc -lembind -o fnmatch.js main.cpp
+
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
+        with:
+          type: 'zip'
+          path: |
+            fnmatch.js
+            fnmatch.wasm
+            index.html
+          filename: "${{ env.targetZip }}"
+          
+      - name: Release prebuilt
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "${{ env.targetZip }}"
+          allowUpdates: true
+          token: ${{ secrets.GITHUB_TOKEN }}

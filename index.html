@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+  <script>
+    var Module = {
+      onRuntimeInitialized: function() {
+        /*
+        #include <stdio.h>
+        #include <fnmatch.h>
+        
+        int main()
+        {
+            char pattern[] = "*.c";
+            char string[] = "hello.c";
+            int r;
+        
+            r = fnmatch(pattern,string,0);
+            if( r==0 )
+                printf("'%s' matches '%s'\n",
+                        pattern,
+                        string
+                      );
+            else if( r==FNM_NOMATCH )
+                printf("'%s' does not match '%s'\n",
+                        pattern,
+                        string
+                      );
+            else
+                fprintf(stderr,"fnmatch() error\n");
+        
+            return(0);
+        }
+        */
+        const r = Module.fnmatch("*.c", "hello.c", 0);
+        if (r == 0) {
+          console.log("matches");
+        } else if (r == Module.FNM_NOMATCH) {
+          console.log("does not  match");
+        } else {
+          console.error("fnmatch() error");
+        }
+      }
+    };
+  </script>
+  <script src="fnmatch.js"></script>
+</html>
