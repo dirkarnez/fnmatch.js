@@ -11,7 +11,7 @@ jobs:
     env:
       targetZip: fnmatch.js-${{ github.ref_name }}-emscripten.zip
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       - name: Build
         run: |
@@ -22,6 +22,12 @@ jobs:
           emscripten/emsdk \
           emcc -lembind -o fnmatch.js main.cpp
 
+      - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
+        with:
+          # The arguments for the `git add` command (see the paragraph below for more info)
+          # Default: '.'
+          add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
+          
       - name: Archive Release
         uses: thedoctor0/zip-release@master
         with:
@@ -32,12 +38,6 @@ jobs:
             index.html
           filename: "${{ env.targetZip }}"
 
-      - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
-        with:
-          # The arguments for the `git add` command (see the paragraph below for more info)
-          # Default: '.'
-          add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
-          
       - name: Release prebuilt
         uses: ncipollo/release-action@v1
         with:
