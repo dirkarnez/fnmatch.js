@@ -12,10 +12,10 @@ jobs:
       targetZip: fnmatch.js-${{ github.ref_name }}-emscripten.zip
     steps:
       - uses: actions/checkout@v4
-      
+
       - uses: actions/checkout@v4
         with:
-          path: '../../${{ github.event.repository.name }}'
+          path: 'committing'
       
       - name: Build
         run: |
@@ -26,20 +26,15 @@ jobs:
           emscripten/emsdk \
           emcc -lembind -o fnmatch.js main.cpp
 
-      - run: cp -f 'fnmatch.js' '$HOME/${{ github.event.repository.name }}'
+      - run: cp -f 'fnmatch.js' 'committing'
           
-      - run: cp -f 'fnmatch.wasm' '$HOME/${{ github.event.repository.name }}'
+      - run: cp -f 'fnmatch.wasm' 'committing'
           
-      - run: cp -f 'index.html' '$HOME/${{ github.event.repository.name }}'
-      
-      - run: ls
-        
-      - working-directory: '$HOME/${{ github.event.repository.name }}'
-        run: ls
-        
+      - run: cp -f 'index.html' 'committing'
+
       - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
-          cwd: '$HOME/${{ github.event.repository.name }}'
+          cwd: 'committing'
           # The arguments for the `git add` command (see the paragraph below for more info)
           # Default: '.'
           # add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
