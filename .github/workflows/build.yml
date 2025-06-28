@@ -27,17 +27,20 @@ jobs:
           emcc -lembind -o fnmatch.js main.cpp
 
       - run: |
-          cp "fnmatch.js" "$HOME/${{ github.event.repository.name }}"
+          cp -f "fnmatch.js" "$HOME/${{ github.event.repository.name }}/" && \
+          echo "ok"
           
       - run: |
-          cp "fnmatch.wasm" "$HOME/${{ github.event.repository.name }}"
+          cp -f "fnmatch.wasm" "$HOME/${{ github.event.repository.name }}/" && \
+          echo "ok"
           
       - run: |
-          cp "index.html" "$HOME/${{ github.event.repository.name }}"
+          cp -f "index.html" "$HOME/${{ github.event.repository.name }}/" && \
+          echo "ok"
 
       - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
-          cwd: '$HOME/${{ github.event.repository.name }}'
+          cwd: '$HOME/${{ github.event.repository.name }}/'
           # The arguments for the `git add` command (see the paragraph below for more info)
           # Default: '.'
           # add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
