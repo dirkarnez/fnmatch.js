@@ -1,5 +1,5 @@
-fnmatch.js
-==========
+[fnmatch.js](https://dirkarnez.github.io/fnmatch.js/)
+=====================================================
 ### API
 - [fnmatch(3): match filename/pathname - Linux man page](https://linux.die.net/man/3/fnmatch)
 - https://c-for-dummies.com/blog/?p=4813
