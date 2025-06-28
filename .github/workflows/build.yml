@@ -26,18 +26,12 @@ jobs:
           emscripten/emsdk \
           emcc -lembind -o fnmatch.js main.cpp
 
-      - run: |
-          cp -f "fnmatch.js" "$HOME/${{ github.event.repository.name }}" && \
-          echo "ok"
+      - run: cp -f 'fnmatch.js' '$HOME/${{ github.event.repository.name }}'
           
-      - run: |
-          cp -f "fnmatch.wasm" "$HOME/${{ github.event.repository.name }}" && \
-          echo "ok"
+      - run: cp -f 'fnmatch.wasm' '$HOME/${{ github.event.repository.name }}'
           
-      - run: |
-          cp -f "index.html" "$HOME/${{ github.event.repository.name }}" && \
-          echo "ok"
-
+      - run: cp -f 'index.html' '$HOME/${{ github.event.repository.name }}'
+      
       - run: ls
         
       - working-directory: '$HOME/${{ github.event.repository.name }}'
