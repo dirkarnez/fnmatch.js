@@ -13,6 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - uses: actions/checkout@v4
+        with:
+          path: '$USERPROFILE/Downloads/${{ github.event.repository.name }}'
+      
       - name: Build
         run: |
           docker run \
@@ -22,11 +26,24 @@ jobs:
           emscripten/emsdk \
           emcc -lembind -o fnmatch.js main.cpp
 
+      - shell: cmd
+        run: |
+          xcopy /H /Y /C "fnmatch.js" "%USERPROFILE%\Downloads\${{ github.event.repository.name }}"
+          
+      - shell: cmd
+        run: |
+          xcopy /H /Y /C "fnmatch.wasm" "%USERPROFILE%\Downloads\${{ github.event.repository.name }}"
+          
+      - shell: cmd
+        run: |
+          xcopy /H /Y /C "index.html" "%USERPROFILE%\Downloads\${{ github.event.repository.name }}"
+
       - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
+          cwd: '$USERPROFILE/Downloads/${{ github.event.repository.name }}'
           # The arguments for the `git add` command (see the paragraph below for more info)
           # Default: '.'
-          add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
+          # add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
           
       - name: Archive Release
         uses: thedoctor0/zip-release@master
