@@ -38,13 +38,14 @@ jobs:
           cp -f "index.html" "$HOME/${{ github.event.repository.name }}" && \
           echo "ok"
 
-          
+      - run: ls
+        
       - working-directory: '$HOME/${{ github.event.repository.name }}'
         run: ls
-          
+        
       - uses: EndBug/add-and-commit@v9 # You can change this to use a specific version.
         with:
-          cwd: '$HOME/${{ github.event.repository.name }}/'
+          cwd: '$HOME/${{ github.event.repository.name }}'
           # The arguments for the `git add` command (see the paragraph below for more info)
           # Default: '.'
           # add: '["fnmatch.js", "fnmatch.wasm", "index.html"]'
