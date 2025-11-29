@@ -68,7 +68,7 @@
             return `"${fileName}" is matched with "${query}"? ${isMatched}, correct? ${isMatched == expected }`
           })
           .forEach(str => {
-            constainer.innerText = `${str}<br>`;
+            constainer.innerHTML += `<p>${str}</p>`;
           })
         }
       }
