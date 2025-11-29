@@ -64,8 +64,8 @@
             { fileName:"fnmatch_translate.py", expected: true },
             { fileName:"index.rst", expected: false }
           ].map(({ fileName, expected }) => {
-            const isMatched = (Module.fnmatch(query, filename, 0) == 0);
-            return `"${filename}" is matched with "${query}"? ${isMatched}, correct? ${isMatched == expected }`
+            const isMatched = (Module.fnmatch(query, fileName, 0) == 0);
+            return `"${fileName}" is matched with "${query}"? ${isMatched}, correct? ${isMatched == expected }`
           })
           .forEach(str => {
             constainer.innerText = `${str}<br>`;
