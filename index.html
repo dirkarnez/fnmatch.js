@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <script>
-    var Module = {
+    const Module = {
       onRuntimeInitialized: function() {
         /*
         #include <stdio.h>
@@ -36,7 +36,7 @@
         } else if (r == Module.FNM_NOMATCH) {
           console.log("does not  match");
         } else {
-          console.error("fnmatch() error");
+          console.error("fnmatch() returns unexpected value");
         }
 
         {
@@ -64,7 +64,7 @@
             { fileName:"fnmatch_translate.py", expected: true },
             { fileName:"index.rst", expected: false }
           ].map(({ fileName, expected }) => {
-            const isMatched = (Module.fnmatch(, filename, 0) == 0);
+            const isMatched = (Module.fnmatch(query, filename, 0) == 0);
             return `"${filename}" is matched with "${query}"? ${isMatched}, correct? ${isMatched == expected }`
           })
           .forEach(str => {
