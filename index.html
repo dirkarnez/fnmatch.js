@@ -65,7 +65,7 @@
             { fileName:"index.rst", expected: false }
           ].map(({ fileName, expected }) => {
             const isMatched = (Module.fnmatch(query, fileName, 0) == 0);
-            return `"${fileName}" is matched with "${query}"? ${isMatched}, correct? ${isMatched == expected }`
+            return `<span style="color: blue">${fileName}</span> is matched with <span style="color: blue">${query}</span>? <span style="color: blue">${isMatched}</span>, correct? <span style="color: blue">${isMatched == expected }</span>`
           })
           .forEach(str => {
             constainer.innerHTML += `<p>${str}</p>`;
@@ -74,6 +74,7 @@
       }
     };
   </script>
-  <div id="container"></div>
+  <a href="https://github.com/dirkarnez/fnmatch.js" target="_blank">https://github.com/dirkarnez/fnmatch.js</a><br>
+  <div id="container" style="font-family: monospace;"></div>
   <script src="./fnmatch.js"></script>
 </html>
