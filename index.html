@@ -38,8 +38,42 @@
         } else {
           console.error("fnmatch() error");
         }
+
+        {
+          const constainer = document.getElementById("container");
+          /*
+          [fnmatch - Unix filename pattern matching in Python - GeeksforGeeks](https://www.geeksforgeeks.org/python/fnmatch-unix-filename-pattern-matching-python/)
+          
+          $ python fnmatch_fnmatch.py
+          
+          Pattern : fnmatch_*.py
+          
+          Filename: __init__.py               False
+          Filename: fnmatch_filter.py         True
+          Filename: fnmatch_fnmatch.py        True
+          Filename: fnmatch_fnmatchcase.py    True
+          Filename: fnmatch_translate.py      True
+          Filename: index.rst                 False
+          */
+          const query = "fnmatch_*.py";
+          [
+            { fileName: "__init__.py", expected: false },
+            { fileName:"fnmatch_filter.py", expected: true },
+            { fileName:"fnmatch_fnmatch.py", expected: true },
+            { fileName:"fnmatch_fnmatchcase.py", expected: true },
+            { fileName:"fnmatch_translate.py", expected: true },
+            { fileName:"index.rst", expected: false }
+          ].map(({ fileName, expected }) => {
+            const isMatched = (Module.fnmatch(, filename, 0) == 0);
+            return `"${filename}" is matched with "${query}"? ${isMatched}, correct? ${isMatched == expected }`
+          })
+          .forEach(str => {
+            constainer.innerText = `${str}<br>`;
+          })
+        }
       }
     };
   </script>
+  <div id="container"></div>
   <script src="./fnmatch.js"></script>
 </html>
